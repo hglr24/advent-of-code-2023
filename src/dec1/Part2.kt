@@ -2,8 +2,6 @@ package dec1
 
 import java.io.File
 
-private var sum = 0
-
 private val FORWARD_INT_NAME_MAP = mapOf(
     "one" to "1",
     "two" to "2",
@@ -32,17 +30,17 @@ private val FORWARD_DIGIT_REGEX = Regex("(?:\\d|one|two|three|four|five|six|seve
 private val REVERSE_DIGIT_REGEX = Regex("(?:\\d|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin)")
 
 fun main() {
-    File("dec1/input.txt").forEachLine {
-        parseLineAndAddToSum(it)
+    var sum = 0
+    File("inputs/dec1/input.txt").forEachLine {
+        sum += findBookendDigits(it)
     }
     println(sum)
 }
 
-private fun parseLineAndAddToSum(line: String) {
+private fun findBookendDigits(line: String): Int {
     // Line always contains at least one digit
     val firstMatch = FORWARD_DIGIT_REGEX.find(line)!!.value
     val lastMatch = REVERSE_DIGIT_REGEX.find(line.reversed())!!.value
-    val parsedInteger = FORWARD_INT_NAME_MAP.getOrDefault(firstMatch, firstMatch)
+    return FORWARD_INT_NAME_MAP.getOrDefault(firstMatch, firstMatch)
         .plus(REVERSE_INT_NAME_MAP.getOrDefault(lastMatch, lastMatch)).toInt()
-    sum += parsedInteger
 }
