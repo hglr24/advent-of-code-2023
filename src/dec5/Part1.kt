@@ -4,8 +4,8 @@ import java.io.File
 
 private val NUM_LINE_REGEX = Regex("(\\d+)\\s(\\d+)\\s(\\d+)")
 
-lateinit var seeds: Array<Long>
-lateinit var isConverted: Array<Boolean>
+private lateinit var seeds: Array<Long>
+private lateinit var isConverted: Array<Boolean>
 
 fun main() {
     val reader = File("inputs/dec5/input.txt").bufferedReader()
